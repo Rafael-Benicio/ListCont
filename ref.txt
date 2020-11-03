@@ -1,0 +1,23 @@
+ <View >     
+
+        <View style={styles.corp}>
+
+          <View>
+            <Button title="/" color="#480077" />
+          </View>
+
+          <View style={styles.corpTex}>
+            <Text style={styles.tex}>Ali</Text>
+          </View>
+
+          <View style={styles.corpBts}>
+            <Button title='+' color='#480077' onPress={()=>setCont({list:cont.list+1})}/>
+
+            <TextInput style={styles.leftInput} maxLength={3} defaultValue={""+cont.list+""}/>
+            
+            <Button title='-' color='#480077' onPress={()=>setCont({list:cont.list-1})}/>
+          </View>
+          
+        </View>
+
+</View>

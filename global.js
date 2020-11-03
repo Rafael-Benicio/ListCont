@@ -1,4 +1,7 @@
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Dimensions} from 'react-native'
+
+const deviceWidth = Dimensions.get('window').width/2
+const deviceHeight = Dimensions.get('window').height/2
 
 const styles = StyleSheet.create({
     container: {
@@ -16,21 +19,63 @@ const styles = StyleSheet.create({
       padding:5,
       flexDirection:'row',
       backgroundColor:'#7400bb',
-      justifyContent:'space-between'
+      justifyContent:'space-between',
+      borderStyle:'solid',
+      borderBottomWidth:1,
+      borderColor:"#480077"
     },
     corpBts:{
       flexDirection:'row',
-      paddingRight:15,
       alignItems:'center'
     },
     leftInput:{
       backgroundColor:'#fff',
       height:30,
       marginLeft:3,
-      marginRight:3
+      marginRight:3,
+      width:27,
+      textAlign:'center',
+      paddingTop:4
+      
+    },
+    corpTex:{
+      alignItems:'center',
+      justifyContent:'center'
     },
     bt:{
       backgroundColor: "#DDDDDD"
+    },
+    tex:{
+      color:'#fff'
+    },
+    pos:{
+      position:'absolute',
+      right:deviceWidth-100,
+      top:deviceHeight-25,
+      backgroundColor:'#fff',
+      borderRadius:15,
+      width:200,
+      // height:50,
+      alignItems:'center',
+      justifyContent:'center',
+      borderStyle:'solid',
+      borderWidth:1,
+      borderColor:"#480077",
+      padding:10
+    },
+    inputPromp:{
+      backgroundColor:'#eee',
+      width:150,
+      borderRadius:8,
+      padding:5,
+      fontSize:18,
+      marginTop:5
+    },
+    prompBt:{
+      marginTop:10,
+      flexDirection:'row',
+      justifyContent:'space-between',
+      width:150
     }
   });
 
