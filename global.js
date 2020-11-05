@@ -5,24 +5,34 @@ const deviceHeight = Dimensions.get('window').height/2
 
 const styles = StyleSheet.create({
     container: {
-      // backgroundColor: '#480077',
+      
     },
     btsView:{
       flexDirection:'row',
       alignItems:'flex-start',
       paddingLeft:20,
-      paddingTop:35,
+      paddingTop:20,
       paddingBottom:20,
       backgroundColor: '#480077',
     },
     corp:{
+      height:45,
       padding:5,
       flexDirection:'row',
       backgroundColor:'#7400bb',
       justifyContent:'space-between',
+      alignItems:'center',
       borderStyle:'solid',
       borderBottomWidth:1,
       borderColor:"#480077"
+    },
+    last:{
+      height:75,
+      // backgroundColor:'#7400bb',
+
+    },
+    corpTrash:{
+      marginLeft:10
     },
     corpBts:{
       flexDirection:'row',
@@ -50,12 +60,12 @@ const styles = StyleSheet.create({
     },
     pos:{
       position:'absolute',
-      right:deviceWidth-100,
-      top:deviceHeight-25,
+      right:deviceWidth-125,
+      top:deviceHeight-125,
       backgroundColor:'#fff',
       borderRadius:15,
-      width:200,
-      // height:50,
+      width:250,
+      opacity:100,
       alignItems:'center',
       justifyContent:'center',
       borderStyle:'solid',
@@ -65,9 +75,10 @@ const styles = StyleSheet.create({
     },
     inputPromp:{
       backgroundColor:'#eee',
-      width:150,
+      width:200,
       borderRadius:8,
-      padding:5,
+      paddingVertical:5,
+      paddingHorizontal:8,
       fontSize:18,
       marginTop:5
     },
@@ -76,6 +87,9 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       justifyContent:'space-between',
       width:150
+    },
+    scroller:{
+      paddingBottom:40
     }
   });
 

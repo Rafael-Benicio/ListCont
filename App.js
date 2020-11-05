@@ -1,68 +1,128 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Text, View, Button, TextInput , Alert, AsyncStorage } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, Button, ScrollView, TextInput , Alert, AsyncStorage } from 'react-native';
+import { Feather } from '@expo/vector-icons'; 
 
 import styles from './global'
 
+import StatusB from './StatusBar'
 
 export default function App() {
-  const [cont,setCont]=useState([
-    {
-      nome:'Manga 1',
-      list:0
+  const [cont,setCont]=useState([{nome:'Item',list:0}])
+  const [per,setPer]=useState(false)
+  const [tmp,setTmp]=useState('')
+
+  async function gt(){
+    try {
+      let i=await AsyncStorage.getItem('Key')
+      return setCont(JSON.parse(i));
+
+    } catch (error) {
+      console.log('erro');
     }
-  ])
+  }
 
-  let per=true
+  gt()
 
-  function PlusList(){
-    let nom="NOM"
+  function Plt(){
+    setPer(true)
+  }
 
-    const array = cont.slice();
-    array.push({nome:nom,list:0})
-    setCont(array);
+  async function PlusList(){
+      let nom=tmp
+
+      const array = cont.slice();
+      array.push({nome:nom,list:0})
+      setCont(array);
+      setTmp('')
+      return await AsyncStorage.setItem('Key', JSON.stringify(cont)); 
   } 
 
-  function Plus(i){
+  async function Plus(i){
     let newArr = [...cont]; 
     newArr[i].list +=1; 
 
-    setCont(newArr); 
+    setCont(newArr);
+    return await AsyncStorage.setItem('Key', JSON.stringify(cont)); 
   }
 
-  function Less(i){
+  async function Less(i){
     let newArr = [...cont]; 
     newArr[i].list -=1; 
 
     setCont(newArr); 
+    return await AsyncStorage.setItem('Key', JSON.stringify(cont));
   }
 
   function edit(i){
     let newArr = [...cont];
+    Alert.alert(
+      'Aviso',
+      'Você deseja apagar o item "'+newArr[i].nome+'"?',
+      [
+        {
+          text: 'Sim',
+          onPress: () => {
+            newArr.splice(i,1)
 
-    newArr.splice(i,1)
+            setCont(newArr); 
+          }
+        },
+        {
+          text: 'Não',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel'
+        }
+      ],
+      { cancelable: false }
+    )
+   
 
-    setCont(newArr); 
+  }
 
+  function prompt(){
+    function no(){
+      setPer(false)
+    }
+
+    function yes(){
+      PlusList()
+      setPer(false)
+
+    }
+
+    if(per){
+    return(
+      <View style={styles.pos} visibl={true}>
+          <Text>Novo Item da List</Text>
+          <TextInput style={styles.inputPromp} value={tmp} onChangeText={tmp => setTmp(tmp)} autoCorrect={false} multiline={false} maxLength={20} autoFocus={true}/>
+          <View style={styles.prompBt}>
+            <Button color='#480077' onPress={yes} title="ok"/>
+            <Button color='#480077' onPress={no} title="Cancelar"/>
+          </View>
+        </View>
+    )}
   }
 
   return (
     <View style={styles.container}>
 
-      <View style={styles.btsView}>
-        <Button title="+" color='#7400bb' onPress={PlusList}/>
-        
-        
-      </View>
+      <StatusB/>
 
+      <View style={styles.btsView}>
+        <Button title="+" color='#7400bb' onPress={Plt}/>    
+      </View>
+    
+      <ScrollView>
+        
         {
           cont.map((count,i)=>(
             <View style={styles.corp}>
-                <View>
-                  <Button title="/" color="#480077" onPress={()=>edit(i)} />
+                <View style={styles.corpTrash}>
+                  <Feather name="trash" size={24} color="white" onPress={()=>edit(i)}/>
                 </View>
 
-                <View style={styles.corpTex}>
+                <View >
 
                   <Text style={styles.tex}>{count.nome}</Text>
                 </View>
@@ -75,16 +135,14 @@ export default function App() {
                   <Button title='-' color='#480077' onPress={()=>Less(i)}/>
                 </View>
             </View >
-        ))} 
+          ))} 
 
-        <View style={styles.pos}>
-          <Text>Novo Item da List</Text>
-          <TextInput style={styles.inputPromp} autoCorrect={false} multiline={false} maxLength={10} autoFocus={true}/>
-          <View style={styles.prompBt}>
-            <Button color='#480077' title="ok"/>
-            <Button color='#480077' title="Cancelar"/>
+          <View style={styles.last}>
+            
           </View>
-        </View>
+        </ScrollView>
+        
+        {prompt()}
 
     </View>
   );
