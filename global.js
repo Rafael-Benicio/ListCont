@@ -11,9 +11,16 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       alignItems:'flex-start',
       paddingLeft:20,
+      paddingRight:20,
       paddingTop:20,
       paddingBottom:20,
+      justifyContent:'space-between',
       backgroundColor: '#480077',
+    },
+    dados:{
+      flexDirection:'row',
+      width:180,
+      justifyContent:'space-between'
     },
     corp:{
       height:45,

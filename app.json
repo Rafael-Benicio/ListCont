@@ -1,15 +1,15 @@
 {
   "expo": {
-   "name": "ListCOnt",
+   "name": "ListCont",
    "icon": "./assets/icon.png",
    "version": "1.0.0",
-   "slug": "your-app-slug",
+   "slug": "rafael",
    "ios": {
-     "bundleIdentifier": "com.yourcompany.yourappname",
+     "bundleIdentifier": "com.rafael.listcont",
      "buildNumber": "1.0.0"
    },
    "android": {
-     "package": "com.yourcompany.ListOCont",
+     "package": "com.rafael.listcont",
      "versionCode": 1
    }
   }
